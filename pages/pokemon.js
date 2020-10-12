@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from "../component/Layout.js"
 import Link from "next/Link"
 
+
 export default function pokemon({ pokeman }) {
     return (
         <Layout className="" title={pokeman.name}>
