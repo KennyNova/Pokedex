@@ -3,19 +3,40 @@ import Layout from "../component/Layout.js"
 import Link from 'next/link'
 
 export default function Home({ pokemon }) {
+
   return (
     <Layout title="NextJS Pokedex">
+      <style jsx>{`
+        .toggle-checkbox:checked {
+          @apply: right-0 border-green-400;
+          right: 0;
+          border-color: #68D391;
+
+          transition: all 0.3s ease-in-out;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+          @apply: bg-green-400;
+          background-color: #68D391;
+          transition: all 0.3s ease-in-out;
+        }
+      `}</style>
         <h1 className="text-4xl mb-8 text-center ">NextJS Pokedex</h1>
         <ul className=" flex -mx-2 flex-wrap ">
           {pokemon.map((pokeman, index) => (
             <li className="w-1/4 h-full flex-wrap" key={index}>
               <Link href={`/pokemon?id=${index + 1}`}>
-                <a className="border p-4 border-gray my-2 mx-2 capitalize flex text-lg bg-gray-300 rounded-md ">
+                <a className="border p-4 border-gray my-1 mx-2 capitalize flex text-lg bg-gray-300 rounded-md ">
                   <img className="w-20 h-20 mr-3" src={pokeman.image} alt={pokeman.name}/>
                   <span className="mr-2 font-bold">{index + 1}.</span>
                   {pokeman.name}
-                </a>
+                  </a>
               </Link>
+              <div className="relative mx-2 inline-block w-10 mr-2 align-middle select-none transition-all duration-200 ease-in">
+                <input type="checkbox" name="toggle" id={index}  className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                <label for="toggle" name="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+              </div>
+              <label for="toggle" class="text-xs text-gray-700">Captured</label>
+              <div class="flex items-center justify-center w-full"></div>
             </li>
           ))}
         </ul>
@@ -40,4 +61,3 @@ export async function getStaticProps(context){
     console.error(err);
   }
 }
-
