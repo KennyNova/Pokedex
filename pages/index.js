@@ -2,9 +2,7 @@ import Head from 'next/head'
 import Layout from "../component/Layout.js"
 import Link from 'next/link'
 
-var pokemonNames = {
-  name: []
-};
+
 
 export default function Home({ pokemon }) {
   return (
