@@ -2,8 +2,58 @@ import React from 'react'
 import Layout from "../component/Layout.js"
 import Link from "next/link"
 
+var color = "";
 
 export default function pokemon({ pokeman }) {
+    function typeColor(req){
+        switch (req){
+        case "grass":
+            color = "text-green-500 capitalize text-center"
+        break;
+        case "bug":
+            color = "text-green-500 capitalize text-center"
+        break;
+        case "poison":
+            color = "text-purple-500 capitalize text-center"
+        break;
+        case "fire":
+            color = "text-orange-500 capitalize text-center"
+        break;
+        case "water":
+            color = "text-blue-500 capitalize text-center"
+        break;
+        case "flying":
+            color = "text-blue-200 capitalize text-center"
+        break;
+        case "normal":
+            color = "text-yellow-500 capitalize text-center"
+        break;
+        case "psychic":
+            color = "text-purple-400 capitalize text-center"
+        break;
+        case "rock":
+            color = "text-gray-700 capitalize text-center"
+        break;
+        case "dragon":
+            color = "text-purple-700 capitalize text-center"
+        break;
+        case "ice":
+            color = "text-teal-200 capitalize text-center"
+        break;
+        case "dark":
+            color = "text-black capitalize text-center"
+        break;
+        case "electric":
+            color = "text-yellow-300 capitalize text-center"
+        break;
+        case "fighting":
+            color = "text-orange-600 capitalize text-center"
+        break;
+        case "fairy":
+            color = "text-pink-400 capitalize text-center"
+        break;
+    }
+    }
     return (
         <Layout className="" title={pokeman.name}>
             <h1 className="text-4xl mb-2 text-center capitalize">{pokeman.name}</h1>
@@ -12,7 +62,10 @@ export default function pokemon({ pokeman }) {
             <p className="text-center"><span className="font-bold mr-2">Height: </span>{pokeman.height}</p>
             <h2 className="text-2xl mt-6 mb-2 text-center">Types</h2>
             {pokeman.types.map((type, index) => (
-                <p className="capitalize text-center" key={index}>{type.type.name}</p>
+                <div>
+                <a>{typeColor(type.type.name)}</a>
+                <p className={color} key={index}>{type.type.name}</p>
+                </div>
             ))}
             <p className="mt-10 text-center">
                 <Link href="/">

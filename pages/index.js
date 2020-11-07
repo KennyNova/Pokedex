@@ -2,8 +2,9 @@ import Head from 'next/head'
 import Layout from "../component/Layout.js"
 import Link from 'next/link'
 
-export default function Home({ pokemon }) {
 
+
+export default function Home({ pokemon }) {
   return (
     <Layout title="NextJS Pokedex">
       <style jsx>{`
@@ -33,10 +34,10 @@ export default function Home({ pokemon }) {
               </Link>
               <div className="relative mx-2 inline-block w-10 mr-2 align-middle select-none transition-all duration-200 ease-in">
                 <input type="checkbox" name="toggle" id={index}  className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                <label for="toggle" name="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                <label htmlFor="toggle" name="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
               </div>
-              <label for="toggle" class="text-xs text-gray-700">Captured</label>
-              <div class="flex items-center justify-center w-full"></div>
+              <label htmlFor="toggle" className="text-xs text-gray-700">Captured</label>
+              <div className="flex items-center justify-center w-full"></div>
             </li>
           ))}
         </ul>
