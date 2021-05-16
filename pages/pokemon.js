@@ -10,6 +10,9 @@ export default function pokemon({ pokeman }) {
         case "grass":
             color = "text-green-500 capitalize text-center"
         break;
+        case "ground":
+            color = "text-yellow-600 capitalize text-center"
+        break;
         case "bug":
             color = "text-green-500 capitalize text-center"
         break;
@@ -56,18 +59,18 @@ export default function pokemon({ pokeman }) {
     }
     return (
         <Layout className="" title={pokeman.name}>
-            <h1 className="text-4xl mb-2 text-center capitalize">{pokeman.name}</h1>
+            <h1 className="text-4xl mb-2 text-center capitalize text-white">{pokeman.name}</h1>
             <img className="mx-auto" src={pokeman.image} alt={pokeman.name}/>
-            <p className="text-center"><span className="font-bold mr-2">Weight: </span>{pokeman.weight}</p>
-            <p className="text-center"><span className="font-bold mr-2">Height: </span>{pokeman.height}</p>
-            <h2 className="text-2xl mt-6 mb-2 text-center">Types</h2>
+            <p className="text-center text-white"><span className="font-bold mr-2">Weight: </span>{pokeman.weight}</p>
+            <p className="text-center text-white"><span className="font-bold mr-2">Height: </span>{pokeman.height}</p>
+            <h2 className="text-2xl mt-6 mb-2 text-center text-white">Types</h2>
             {pokeman.types.map((type, index) => (
                 <div>
                 <a>{typeColor(type.type.name)}</a>
                 <p className={color} key={index}>{type.type.name}</p>
                 </div>
             ))}
-            <p className="mt-10 text-center">
+            <p className="mt-10 text-center text-white">
                 <Link href="/">
                     <a className="text-2xl underline">Home</a>
                 </Link>
