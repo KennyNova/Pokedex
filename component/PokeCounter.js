@@ -1,9 +1,9 @@
-export const PokeCounter = () => {
+import { useEffect, useState } from "react";
 
-
-    return(
-        <div className="right-0 absolute pr-20">
-            <p>0/150</p>
-        </div>
-    )
+export default function PokeCounter({ num }) {
+	return (
+		<div>
+			<p>{num}/150</p>
+		</div>
+	);
 }
