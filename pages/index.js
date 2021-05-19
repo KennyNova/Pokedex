@@ -13,20 +13,23 @@ export default function Home({ pokemon }) {
 
 	function caught(e, id) {
 		let list = pokemonCaughtList;
-
-		if (pokemonCaughtList.includes(id)) {
+		console.log(e.target.checked)
+		if (pokemonCaughtList.includes(id) || !e.target.checked) {
 			pokemonCaught--;
 			setPokemonCaught(pokemonCaught);
 			list = list.filter((i) => i !== id);
+			console.log(list)
 			setPokemonCaughtList(list);
-			
+			console.log(pokemonCaughtList)
 		}
-		if (!pokemonCaughtList.includes(id)) {
+		else {
 			pokemonCaught++;
 			setPokemonCaught(pokemonCaught);
 			list.push(id);
 			setPokemonCaughtList(list);
+			console.log("ran")
 		}
+		console.log(pokemonCaughtList)
 		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
 	}
 
@@ -51,6 +54,7 @@ export default function Home({ pokemon }) {
 	function initCookies(list, once) {
 		if (once !== 1) {
 			setPokemonCaughtList(list)
+			setPokemonCaught(list.length)
 			setOnce(1)
 		}
 	}
@@ -82,10 +86,10 @@ export default function Home({ pokemon }) {
 					background-color: #131313;
 				}
 			`}</style>
-			<div className="right-0 fixed pr-1">
+			<div className="right-0 fixed pr-1 text-white">
 				<PokeCounter num={pokemonCaught} />
 			</div>
-			<div className="right-0 fixed pr-1 pt-5">
+			<div className="right-0 fixed pr-1 pt-5 text-white">
 				<button onClick={() => caughtClear()}>X</button>
 				<button onClick={() => caughtAll()}>✓</button>
 				<button>⤺</button>
