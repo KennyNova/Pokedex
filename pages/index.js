@@ -1,32 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../component/Layout.js";
 import Link from "next/link";
 import PokeCounter from "../component/PokeCounter.js";
+import Cookies from 'universal-cookie';
 
 export default function Home({ pokemon }) {
+	const cookies = new Cookies();
+
 	let [pokemonCaught, setPokemonCaught] = useState(0);
 	let [pokemonCaughtList, setPokemonCaughtList] = useState([]);
+	let [once, setOnce] = useState(0)
 
 	function caught(e, id) {
 		let list = pokemonCaughtList;
 
-		if (e.target.checked) {
+		if (pokemonCaughtList.includes(id)) {
+			pokemonCaught--;
+			setPokemonCaught(pokemonCaught);
+			list = list.filter((i) => i !== id);
+			setPokemonCaughtList(list);
+			
+		}
+		if (!pokemonCaughtList.includes(id)) {
 			pokemonCaught++;
 			setPokemonCaught(pokemonCaught);
 			list.push(id);
 			setPokemonCaughtList(list);
 		}
-		if (!e.target.checked) {
-			pokemonCaught--;
-			setPokemonCaught(pokemonCaught);
-			list = list.filter((i) => i !== id);
-			setPokemonCaughtList(list);
-		}
-		console.log(pokemonCaughtList);
+		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
 	}
 
 	function caughtClear() {
-		//create for loop to clear all checkboxes
 		let list = [];
 		setPokemonCaughtList(list);
 		setPokemonCaught(0);
@@ -37,9 +41,22 @@ export default function Home({ pokemon }) {
 		for (let i = 0; i <= 150; i++) {
 			list.push(i);
 		}
+		console.log(list)
 		setPokemonCaught(150);
 		setPokemonCaughtList(list);
 	}
+
+	function initCookies(list, once) {
+		if (once !== 1) {
+			setPokemonCaughtList(list)
+			setOnce(1)
+		}
+	}
+
+	useEffect(() => {
+		let list = cookies.get('list')
+		initCookies(list, once)
+	});
 
 	return (
 		<Layout title="NextJS Pokedex">
@@ -101,6 +118,7 @@ export default function Home({ pokemon }) {
 								htmlFor="toggle"
 								name="toggle"
 								className="toggle-label block overflow-hidden h-6 rounded-full secondary-gray cursor-pointer transition duration-500 ease-in-out"
+								onClick={(e) => caught(e, index)}
 							></label>
 						</div>
 						<label htmlFor="toggle" className="text-xs text-gray-300">
@@ -116,7 +134,7 @@ export default function Home({ pokemon }) {
 
 export async function getStaticProps(context) {
 	try {
-		const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150");
+		const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150`);
 		const { results } = await res.json();
 		const pokemon = results.map((pokeman, index) => {
 			const paddedIndex = ("00" + (index + 1)).slice(-3);
