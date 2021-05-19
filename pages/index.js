@@ -18,7 +18,6 @@ export default function Home({ pokemon }) {
 			pokemonCaught--;
 			setPokemonCaught(pokemonCaught);
 			list = list.filter((i) => i !== id);
-			console.log(list)
 			setPokemonCaughtList(list);
 			console.log(pokemonCaughtList)
 		}
