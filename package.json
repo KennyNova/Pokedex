@@ -8,9 +8,11 @@
     "start": "next start -p 8080"
   },
   "dependencies": {
+    "cookies": "^0.8.0",
     "next": "9.5.3",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "postcss-preset-env": "^6.7.0",
