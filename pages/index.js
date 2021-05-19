@@ -57,7 +57,9 @@ export default function Home({ pokemon }) {
 
 	useEffect(() => {
 		let list = cookies.get('list')
-		initCookies(list, once)
+		if (list) {
+			initCookies(list, once)
+		}
 	});
 
 	return (
