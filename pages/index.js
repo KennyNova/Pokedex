@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import Layout from "../component/Layout.js"
 import Link from 'next/link'
-
-
+import { PokeCounter } from '../component/PokeCounter.js'
 
 export default function Home({ pokemon }) {
   return (
@@ -25,7 +24,9 @@ export default function Home({ pokemon }) {
           background-color:#131313;
         }
       `}</style>
+      <PokeCounter/>
         <h1 className="text-4xl mb-8 text-center text-white">NextJS Pokedex</h1>
+        
         <ul className="items-center justify-center lg:flex md:flex  flex-wrap">
           {pokemon.map((pokeman, index) => (
             <li className="sm:w-1/2  md:1/2 lg:w-1/4 2xl:w-1/6 h-full flex-wrap transition-all duration-100" key={index}>
