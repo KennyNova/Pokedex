@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../component/Layout.js";
 import Link from "next/link";
 
-var color = "";
+let color = "";
 
 export default function pokemon({ pokeman }) {
+	const units = ["Kg", "Ibs", "m", "ft"]
+	
+	const [system, setSystem] = useState('metric')
+	const [unit, setUnit] = useState(0)
+
 	function typeColor(req) {
 		console.log(pokeman);
 		switch (req) {
@@ -59,19 +64,53 @@ export default function pokemon({ pokeman }) {
 		}
 	}
 
+	function switchUnits(system) {
+		setSystem(system)
+	}
+
+	function weight(num) {
+		if (system === "imperial") {
+			num = num / 10 * 2.205
+			return parseInt(num) + " Ibs"
+		}
+		if (system === "metric") {
+			return num / 10 + " Kg"
+		}
+	}
+
+	function height(num) {
+		if (system === "imperial") {
+			num = num / 10 * 39.37
+			let feet = Math.floor(num / 12)
+			let inches = parseInt(num % 12)
+			return feet + "'" + inches + '"'
+		}
+		if (system === "metric") {
+			if (num / 10 < 1) {
+				return num * 10 + " cm"
+			}
+			return num / 10  + " m"
+		}
+	}
+
 	return (
 		<Layout className="" title={pokeman.name}>
+			<div className="text-white text-center">
+				<button className="mr-5" onClick={() => switchUnits("metric")}>Metric</button>
+				<button  onClick={() => switchUnits("imperial")}>Imperial</button>
+			</div>
 			<h1 className="text-4xl mb-2 text-center capitalize text-white">
 				{pokeman.name}
 			</h1>
+
 			<img className="mx-auto" src={pokeman.image} alt={pokeman.name} />
 			<p className="text-center text-white">
 				<span className="font-bold mr-2">Weight: </span>
-				{pokeman.weight / 10}kg
+				{weight(pokeman.weight)}
 			</p>
 			<p className="text-center text-white">
 				<span className="font-bold mr-2">Height: </span>
-				{pokeman.height}m
+				{height(pokeman.height)}
 			</p>
 			<h2 className="text-2xl mt-6 mb-2 text-center text-white">Types</h2>
 			{pokeman.types.map((type, index) => (

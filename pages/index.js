@@ -10,6 +10,7 @@ export default function Home({ pokemon }) {
 	let [pokemonCaught, setPokemonCaught] = useState(0);
 	let [pokemonCaughtList, setPokemonCaughtList] = useState([]);
 	let [once, setOnce] = useState(0)
+	let [unit, setUnit] = useState(false)
 
 	function caught(e, id) {
 		let list = pokemonCaughtList;
@@ -18,6 +19,7 @@ export default function Home({ pokemon }) {
 			pokemonCaught--;
 			setPokemonCaught(pokemonCaught);
 			list = list.filter((i) => i !== id);
+			console.log(list)
 			setPokemonCaughtList(list);
 			console.log(pokemonCaughtList)
 		}
@@ -56,6 +58,10 @@ export default function Home({ pokemon }) {
 			setPokemonCaught(list.length)
 			setOnce(1)
 		}
+	}
+
+	function switchUnits() {
+		
 	}
 
 	useEffect(() => {
