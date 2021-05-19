@@ -34,6 +34,7 @@ export default function Home({ pokemon }) {
 		let list = [];
 		setPokemonCaughtList(list);
 		setPokemonCaught(0);
+		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
 	}
 
 	function caughtAll() {
@@ -44,6 +45,7 @@ export default function Home({ pokemon }) {
 		console.log(list)
 		setPokemonCaught(150);
 		setPokemonCaughtList(list);
+		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
 	}
 
 	function initCookies(list, once) {
