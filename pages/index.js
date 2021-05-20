@@ -10,7 +10,6 @@ export default function Home({ pokemon }) {
 	let [pokemonCaught, setPokemonCaught] = useState(0);
 	let [pokemonCaughtList, setPokemonCaughtList] = useState([]);
 	let [once, setOnce] = useState(0)
-	let [unit, setUnit] = useState(false)
 
 	function caught(e, id) {
 		let list = pokemonCaughtList;
@@ -60,10 +59,6 @@ export default function Home({ pokemon }) {
 		}
 	}
 
-	function switchUnits() {
-		
-	}
-
 	useEffect(() => {
 		let list = cookies.get('list')
 		if (list) {
@@ -100,7 +95,6 @@ export default function Home({ pokemon }) {
 				<button>⤺</button>
 			</div>
 			<h1 className="text-4xl mb-8 text-center text-white">NextJS Pokedex</h1>
-
 			<ul className="items-center justify-center lg:flex md:flex  flex-wrap">
 				{pokemon.map((pokeman, index) => (
 					<li
@@ -132,7 +126,7 @@ export default function Home({ pokemon }) {
 								name="toggle"
 								className="toggle-label block overflow-hidden h-6 rounded-full secondary-gray cursor-pointer transition duration-500 ease-in-out"
 								onClick={(e) => caught(e, index)}
-							></label>
+							/>
 						</div>
 						<label htmlFor="toggle" className="text-xs text-gray-300">
 							Captured
@@ -147,7 +141,7 @@ export default function Home({ pokemon }) {
 
 export async function getStaticProps(context) {
 	try {
-		const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150`);
+		const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=800`);
 		const { results } = await res.json();
 		const pokemon = results.map((pokeman, index) => {
 			const paddedIndex = ("00" + (index + 1)).slice(-3);
