@@ -1,7 +1,7 @@
 # NextJS Pokedex
 
 This app is a pokedex designed to help the user keep track of pokemon they have caught. The user may also click each pokemon to get more information such as its height, weight, and type\
-Live version: [NextJS Pokedex](https://vercel.com/navidmadani/pokedex)
+Live version: [NextJS Pokedex](https://pokedex-ten-beta.vercel.app/)
 
 ## Local Installation/Start
 

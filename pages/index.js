@@ -62,6 +62,7 @@ export default function Home({ pokemon }) {
 	useEffect(() => {
 		let list = cookies.get('list')
 		if (list) {
+			console.log(list)
 			initCookies(list, once)
 		}
 	});
@@ -141,7 +142,7 @@ export default function Home({ pokemon }) {
 
 export async function getStaticProps(context) {
 	try {
-		const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=800`);
+		const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150`);
 		const { results } = await res.json();
 		const pokemon = results.map((pokeman, index) => {
 			const paddedIndex = ("00" + (index + 1)).slice(-3);
