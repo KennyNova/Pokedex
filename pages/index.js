@@ -9,10 +9,12 @@ export default function Home({ pokemon }) {
 
 	let [pokemonCaught, setPokemonCaught] = useState(0);
 	let [pokemonCaughtList, setPokemonCaughtList] = useState([]);
+	let [previousPokemonCaughtList, setPreviousPokemonCaughtList] = useState([]);
 	let [once, setOnce] = useState(0)
 
 	function caught(e, id) {
 		let list = pokemonCaughtList;
+		setPreviousPokemonCaughtList(list)
 		console.log(e.target.checked)
 		if (pokemonCaughtList.includes(id) || !e.target.checked) {
 			pokemonCaught--;
@@ -47,6 +49,13 @@ export default function Home({ pokemon }) {
 		}
 		console.log(list)
 		setPokemonCaught(150);
+		setPokemonCaughtList(list);
+		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
+	}
+
+	function caughtPrevious() {
+		let list = previousPokemonCaughtList;
+		setPokemonCaught(list.length);
 		setPokemonCaughtList(list);
 		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
 	}
@@ -93,7 +102,7 @@ export default function Home({ pokemon }) {
 			<div className="right-0 fixed pr-1 pt-5 text-white">
 				<button onClick={() => caughtClear()}>X</button>
 				<button onClick={() => caughtAll()}>✓</button>
-				<button>⤺</button>
+				<button onClick={() => caughtPrevious()}>⤺</button>
 			</div>
 			<h1 className="text-4xl mb-8 text-center text-white">NextJS Pokedex</h1>
 			<ul className="items-center justify-center lg:flex md:flex  flex-wrap">
