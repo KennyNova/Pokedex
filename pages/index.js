@@ -16,7 +16,7 @@ export default function Home({ pokemon }) {
 		let list = pokemonCaughtList;
 		setPreviousPokemonCaughtList(list)
 		console.log(e.target.checked)
-		if (pokemonCaughtList.includes(id) || !e.target.checked) {
+		if (pokemonCaughtList.includes(id) ) {
 			pokemonCaught--;
 			setPokemonCaught(pokemonCaught);
 			list = list.filter((i) => i !== id);
@@ -55,6 +55,7 @@ export default function Home({ pokemon }) {
 
 	function caughtPrevious() {
 		let list = previousPokemonCaughtList;
+		setPreviousPokemonCaughtList(pokemonCaughtList)
 		setPokemonCaught(list.length);
 		setPokemonCaughtList(list);
 		cookies.set('list', JSON.stringify(pokemonCaughtList), { path: '/' });
@@ -62,6 +63,7 @@ export default function Home({ pokemon }) {
 
 	function initCookies(list, once) {
 		if (once !== 1) {
+			setPreviousPokemonCaughtList(list)
 			setPokemonCaughtList(list)
 			setPokemonCaught(list.length)
 			setOnce(1)
@@ -131,10 +133,11 @@ export default function Home({ pokemon }) {
 								checked={pokemonCaughtList.includes(index) ? true : false}
 								className="toggle-checkbox absolute block w-6 h-6 rounded-full black appearance-none cursor-pointer transition duration-500 ease-in-out"
 							/>
-							<label
+							<input
 								htmlFor="toggle"
 								name="toggle"
-								className="toggle-label block overflow-hidden h-6 rounded-full secondary-gray cursor-pointer transition duration-500 ease-in-out"
+								id={index}
+								className="toggle-label block overflow-hidden  w-10 h-6 rounded-full secondary-gray cursor-pointer transition duration-500 ease-in-out"
 								onClick={(e) => caught(e, index)}
 							/>
 						</div>
